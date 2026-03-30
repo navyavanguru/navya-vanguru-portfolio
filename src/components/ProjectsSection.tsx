@@ -53,7 +53,7 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.15 }}
-              className="bg-card border border-border rounded-2xl p-8 md:p-12 hover:shadow-lg transition-shadow duration-500"
+              className="bg-card border border-border rounded-2xl p-8 md:p-12 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
             >
               <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
                 {project.tag}

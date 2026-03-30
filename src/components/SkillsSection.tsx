@@ -54,7 +54,7 @@ const SkillsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-background rounded-2xl p-8 border border-border hover:shadow-lg transition-shadow duration-500"
+              className="bg-card rounded-2xl p-8 border border-border hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                 <cat.icon className="w-6 h-6 text-primary" />

@@ -53,7 +53,7 @@ const ServicesSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group bg-background rounded-2xl p-10 border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-500"
+              className="group bg-card rounded-2xl p-10 border border-border hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
             >
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-500">
                 <service.icon className="w-7 h-7 text-primary" />

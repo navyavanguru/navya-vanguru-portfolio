@@ -38,7 +38,7 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="bg-background border border-border rounded-2xl p-8 md:p-12 space-y-6"
+          className="bg-card border border-border rounded-2xl p-8 md:p-12 space-y-6"
         >
           <div className="grid sm:grid-cols-2 gap-6">
             <div>
@@ -46,7 +46,7 @@ const ContactSection = () => {
               <input
                 type="text"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                 placeholder="Your name"
               />
             </div>
@@ -55,7 +55,7 @@ const ContactSection = () => {
               <input
                 type="email"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                 placeholder="you@example.com"
               />
             </div>
@@ -65,7 +65,7 @@ const ContactSection = () => {
             <input
               type="text"
               required
-              className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
               placeholder="Project inquiry"
             />
           </div>
@@ -74,13 +74,13 @@ const ContactSection = () => {
             <textarea
               required
               rows={5}
-              className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
               placeholder="Tell me about your project..."
             />
           </div>
           <button
             type="submit"
-            className="w-full sm:w-auto bg-foreground text-background px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+            className="w-full sm:w-auto bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-purple"
           >
             {submitted ? "Message Sent!" : (
               <>
