@@ -14,6 +14,8 @@ const HeroSection = () => {
   const imageSkewX = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 1.5, -1, 0.5]);
   const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.8, -0.3]);
   const filterBlur = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 0.4, 0.8, 0.2]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
