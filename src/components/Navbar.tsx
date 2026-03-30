@@ -41,14 +41,14 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="text-sm font-medium bg-foreground text-background px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
+            className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-opacity glow-purple"
           >
             Let's Talk
           </a>
@@ -78,7 +78,7 @@ const Navbar = () => {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block py-3 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="block py-3 text-base font-medium text-muted-foreground hover:text-primary transition-colors"
             >
               {link.label}
             </a>
@@ -86,7 +86,7 @@ const Navbar = () => {
           <a
             href="#contact"
             onClick={() => setMobileOpen(false)}
-            className="mt-2 block text-center text-sm font-medium bg-foreground text-background px-5 py-3 rounded-full"
+            className="mt-2 block text-center text-sm font-medium bg-primary text-primary-foreground px-5 py-3 rounded-full"
           >
             Let's Talk
           </a>

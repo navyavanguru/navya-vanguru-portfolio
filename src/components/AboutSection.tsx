@@ -19,7 +19,7 @@ const AboutSection = () => {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground leading-tight">
             Turning Ideas Into
             <br />
-            Impactful Content
+            <span className="text-gradient">Impactful Content</span>
           </h2>
         </motion.div>
 
@@ -47,7 +47,7 @@ const AboutSection = () => {
               { number: "2M+", label: "Content Reach" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-3xl font-display font-bold text-foreground">{stat.number}</p>
+                <p className="text-3xl font-display font-bold text-primary">{stat.number}</p>
                 <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
               </div>
             ))}

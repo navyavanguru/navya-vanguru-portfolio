@@ -9,7 +9,7 @@ const Footer = () => (
       </p>
       <div className="flex gap-6">
         {["LinkedIn", "Instagram", "Twitter"].map((s) => (
-          <a key={s} href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <a key={s} href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
             {s}
           </a>
         ))}
