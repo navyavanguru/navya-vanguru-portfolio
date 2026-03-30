@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import heroImage from "@/assets/hero-portrait.jpg";
+import heroImage from "@/assets/hero-portrait.png";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,7 +16,6 @@ const HeroSection = () => {
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
-      {/* Parallax image — grayscale with purple energy overlay */}
       <motion.div
         className="absolute inset-0"
         style={{ y: imageY, scale: imageScale }}
@@ -30,14 +29,8 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Purple energy overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 mix-blend-screen" />
-
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
-
-      {/* Subtle purple glow at bottom */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[120px]" />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
 
       {/* Hero text */}
       <motion.div
@@ -48,7 +41,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-sm md:text-base tracking-[0.3em] uppercase text-primary font-medium mb-4 glow-text"
+          className="text-sm md:text-base tracking-[0.3em] uppercase text-primary font-medium mb-4"
         >
           Digital Marketer & Content Strategist
         </motion.p>
@@ -75,7 +68,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity glow-purple"
+          className="inline-block mt-8 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
         >
           Let's Work Together
         </motion.a>

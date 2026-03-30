@@ -33,7 +33,7 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
-          <p className="text-sm tracking-[0.25em] uppercase text-primary font-medium mb-4">
+          <p className="text-sm tracking-[0.25em] uppercase text-muted-foreground font-medium mb-4">
             Testimonials
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
@@ -48,11 +48,11 @@ const TestimonialsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="bg-card border border-border rounded-2xl p-8 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
+              className="bg-card border border-border rounded-2xl p-8 hover:border-foreground/20 hover:shadow-lg transition-all duration-500"
             >
               <div className="flex gap-1 mb-6">
                 {Array.from({ length: 5 }).map((_, idx) => (
-                  <Star key={idx} className="w-4 h-4 fill-primary text-primary" />
+                  <Star key={idx} className="w-4 h-4 fill-foreground text-foreground" />
                 ))}
               </div>
               <p className="text-foreground leading-relaxed mb-8 text-[15px]">

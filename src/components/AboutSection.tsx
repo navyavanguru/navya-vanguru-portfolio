@@ -13,7 +13,7 @@ const AboutSection = () => {
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-sm tracking-[0.25em] uppercase text-primary font-medium mb-4">
+          <p className="text-sm tracking-[0.25em] uppercase text-muted-foreground font-medium mb-4">
             About Me
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground leading-tight">
@@ -47,7 +47,7 @@ const AboutSection = () => {
               { number: "2M+", label: "Content Reach" },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="text-3xl font-display font-bold text-primary">{stat.number}</p>
+                <p className="text-3xl font-display font-bold text-foreground">{stat.number}</p>
                 <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
               </div>
             ))}

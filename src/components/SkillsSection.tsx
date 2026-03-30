@@ -39,7 +39,7 @@ const SkillsSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
-          <p className="text-sm tracking-[0.25em] uppercase text-primary font-medium mb-4">
+          <p className="text-sm tracking-[0.25em] uppercase text-muted-foreground font-medium mb-4">
             What I Do
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
@@ -54,23 +54,23 @@ const SkillsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-card rounded-2xl p-8 border border-border hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
+              className="bg-card rounded-2xl p-8 border border-border hover:border-foreground/20 hover:shadow-lg transition-all duration-500"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-                <cat.icon className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-6">
+                <cat.icon className="w-6 h-6 text-foreground" />
               </div>
               <h3 className="font-display text-xl font-semibold text-foreground mb-1">
                 {cat.title}
               </h3>
               {cat.badge && (
-                <span className="inline-block text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-4">
+                <span className="inline-block text-xs font-medium text-muted-foreground bg-accent px-2 py-0.5 rounded-full mb-4">
                   {cat.badge}
                 </span>
               )}
               <ul className="mt-4 space-y-2.5">
                 {cat.skills.map((skill) => (
                   <li key={skill} className="text-sm text-muted-foreground flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-primary" />
+                    <span className="w-1 h-1 rounded-full bg-foreground" />
                     {skill}
                   </li>
                 ))}

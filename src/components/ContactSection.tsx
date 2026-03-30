@@ -22,7 +22,7 @@ const ContactSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p className="text-sm tracking-[0.25em] uppercase text-primary font-medium mb-4">
+          <p className="text-sm tracking-[0.25em] uppercase text-muted-foreground font-medium mb-4">
             Get In Touch
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
@@ -46,7 +46,7 @@ const ContactSection = () => {
               <input
                 type="text"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-shadow"
                 placeholder="Your name"
               />
             </div>
@@ -55,7 +55,7 @@ const ContactSection = () => {
               <input
                 type="email"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-shadow"
                 placeholder="you@example.com"
               />
             </div>
@@ -65,7 +65,7 @@ const ContactSection = () => {
             <input
               type="text"
               required
-              className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-shadow"
               placeholder="Project inquiry"
             />
           </div>
@@ -74,13 +74,13 @@ const ContactSection = () => {
             <textarea
               required
               rows={5}
-              className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-muted text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-shadow resize-none"
               placeholder="Tell me about your project..."
             />
           </div>
           <button
             type="submit"
-            className="w-full sm:w-auto bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-purple"
+            className="w-full sm:w-auto bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
           >
             {submitted ? "Message Sent!" : (
               <>

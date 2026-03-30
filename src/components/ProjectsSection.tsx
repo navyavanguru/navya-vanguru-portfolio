@@ -38,7 +38,7 @@ const ProjectsSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
-          <p className="text-sm tracking-[0.25em] uppercase text-primary font-medium mb-4">
+          <p className="text-sm tracking-[0.25em] uppercase text-muted-foreground font-medium mb-4">
             Featured Work
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
@@ -53,9 +53,9 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.15 }}
-              className="bg-card border border-border rounded-2xl p-8 md:p-12 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
+              className="bg-card border border-border rounded-2xl p-8 md:p-12 hover:border-foreground/20 hover:shadow-lg transition-all duration-500"
             >
-              <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+              <span className="text-xs font-medium text-foreground bg-accent px-3 py-1 rounded-full">
                 {project.tag}
               </span>
               <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mt-4 mb-8">
@@ -68,7 +68,7 @@ const ProjectsSection = () => {
                   { label: "Result", text: project.result },
                 ].map((item) => (
                   <div key={item.label}>
-                    <p className="text-xs tracking-[0.2em] uppercase text-primary font-semibold mb-2">
+                    <p className="text-xs tracking-[0.2em] uppercase text-foreground font-semibold mb-2">
                       {item.label}
                     </p>
                     <p className="text-muted-foreground leading-relaxed">{item.text}</p>
