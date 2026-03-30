@@ -9,61 +9,79 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.6]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const textScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   const [showTitle, setShowTitle] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowTitle(true), 1800);
+    const timer = setTimeout(() => setShowTitle(true), 2200);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden bg-background">
-      {/* Background image with zoom */}
+      {/* Background layer — text BEHIND image */}
+      <div className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none">
+        <motion.h1
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+          style={{ scale: textScale }}
+          className="font-display text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[12vw] font-bold text-foreground/15 leading-none tracking-tighter select-none"
+        >
+          Navya
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={showTitle ? { opacity: 1 } : {}}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="mt-2 text-base sm:text-lg md:text-xl tracking-[0.4em] uppercase text-muted-foreground/30 font-light select-none"
+        >
+          Digital Marketer
+        </motion.p>
+      </div>
+
+      {/* Foreground layer — image ON TOP of text */}
       <motion.div
-        className="absolute inset-0"
-        style={{ scale: imageScale }}
+        className="absolute inset-0 z-10 flex items-end justify-center"
+        style={{ y: imageY }}
       >
         <img
           src={heroImage}
           alt="Navya — Digital Marketer"
-          className="w-full h-full object-cover object-top grayscale"
+          className="h-[90vh] sm:h-[92vh] md:h-[95vh] w-auto max-w-none object-contain object-bottom grayscale drop-shadow-[0_-20px_60px_rgba(0,0,0,0.8)]"
           width={1024}
           height={1280}
         />
       </motion.div>
 
-      {/* Dark overlay */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20 pointer-events-none"
-        style={{ opacity: overlayOpacity }}
-      />
-      <div className="absolute inset-0 bg-background/30 pointer-events-none" />
+      {/* Gradient overlay at bottom for seamless transition */}
+      <div className="absolute inset-x-0 bottom-0 z-20 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
-      {/* Text content — anchored to bottom */}
-      <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center pb-16 md:pb-24 px-6 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+      {/* Foreground text — visible in front of image at bottom */}
+      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col items-center pb-10 md:pb-16 px-6 text-center pointer-events-none">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-foreground tracking-tight leading-none"
+          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 1 }}
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none"
         >
           Navya
-        </motion.h1>
+        </motion.h2>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={showTitle ? { opacity: 1 } : {}}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="mt-4 md:mt-6 overflow-hidden"
+          className="mt-3 md:mt-4 overflow-hidden"
         >
           <motion.p
-            initial={{ y: 20 }}
+            initial={{ y: 16 }}
             animate={showTitle ? { y: 0 } : {}}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-sm md:text-base tracking-[0.35em] uppercase text-muted-foreground font-light"
+            className="text-xs md:text-sm tracking-[0.35em] uppercase text-muted-foreground font-light"
           >
             Digital Marketer
           </motion.p>
@@ -73,13 +91,13 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3, duration: 1 }}
-          className="mt-10 md:mt-14"
+          transition={{ delay: 3.5, duration: 1 }}
+          className="mt-8"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-10 bg-gradient-to-b from-muted-foreground/60 to-transparent mx-auto"
+            className="w-px h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent mx-auto"
           />
         </motion.div>
       </div>
