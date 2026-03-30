@@ -14,42 +14,38 @@ const HeroSection = () => {
   const imageSkewX = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 1.5, -1, 0.5]);
   const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.8, -0.3]);
   const filterBlur = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 0.4, 0.8, 0.2]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
 
   return (
-    <section ref={ref} className="relative h-screen overflow-hidden">
-      <motion.div
-        className="absolute inset-0 origin-bottom"
-        style={{ y: imageY, scale: imageScale, skewX: imageSkewX, rotate: imageRotate }}
-      >
-        <motion.img
-          src={heroImage}
-          alt="Portrait"
-          className="w-full h-full object-cover object-top grayscale"
-          width={1024}
-          height={1280}
-          style={{
-            filter: useTransform(filterBlur, (v) => `blur(${v}px) contrast(${1 + v * 0.05})`),
-          }}
-        />
-      </motion.div>
+    <section ref={ref} className="min-h-screen flex flex-col">
+      {/* Image container */}
+      <div className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <motion.div
+          className="absolute inset-0 origin-bottom"
+          style={{ y: imageY, scale: imageScale, skewX: imageSkewX, rotate: imageRotate }}
+        >
+          <motion.img
+            src={heroImage}
+            alt="Navya"
+            className="w-full h-full object-cover object-top grayscale"
+            width={1024}
+            height={1280}
+            style={{
+              filter: useTransform(filterBlur, (v) => `blur(${v}px) contrast(${1 + v * 0.05})`),
+            }}
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      </div>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
-
-      {/* Hero text */}
-      <motion.div
-        style={{ opacity: textOpacity, y: textY }}
-        className="absolute bottom-0 left-0 right-0 px-6 lg:px-12 pb-20 lg:pb-28 max-w-7xl mx-auto"
-      >
+      {/* Text below image */}
+      <div className="px-6 lg:px-12 py-12 lg:py-16 max-w-7xl mx-auto w-full">
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-sm md:text-base tracking-[0.3em] uppercase text-primary font-medium mb-4"
         >
-          Digital Marketer & Content Strategist
+          Digital Marketer
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
@@ -57,9 +53,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-foreground leading-[0.95] tracking-tight"
         >
-          Crafting Stories
-          <br />
-          That <span className="text-gradient">Convert</span>
+          Navya
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -78,7 +72,7 @@ const HeroSection = () => {
         >
           Let's Work Together
         </motion.a>
-      </motion.div>
+      </div>
     </section>
   );
 };
