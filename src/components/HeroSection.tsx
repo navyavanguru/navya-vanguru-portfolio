@@ -11,21 +11,25 @@ const HeroSection = () => {
 
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
+  const imageSkewX = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 1.5, -1, 0.5]);
+  const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.8, -0.3]);
+  const filterBlur = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 0.4, 0.8, 0.2]);
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
       <motion.div
-        className="absolute inset-0"
-        style={{ y: imageY, scale: imageScale }}
+        className="absolute inset-0 origin-bottom"
+        style={{ y: imageY, scale: imageScale, skewX: imageSkewX, rotate: imageRotate }}
       >
-        <img
+        <motion.img
           src={heroImage}
           alt="Portrait"
           className="w-full h-full object-cover object-top grayscale"
           width={1024}
           height={1280}
+          style={{
+            filter: useTransform(filterBlur, (v) => `blur(${v}px) contrast(${1 + v * 0.05})`),
+          }}
         />
       </motion.div>
 
