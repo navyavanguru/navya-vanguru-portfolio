@@ -30,21 +30,21 @@ const AboutSection = () => {
           className="space-y-6"
         >
           <p className="text-lg text-muted-foreground leading-relaxed">
-            I'm a digital marketer and content strategist who believes every brand has a
-            story worth telling. With expertise in blog writing, video scripting, and social
-            media management, I craft content that doesn't just fill space — it drives engagement,
-            builds trust, and converts audiences into loyal customers.
+            I'm a digital marketer and content strategist passionate about
+            storytelling that moves people. With expertise in blog writing, video scripting,
+            and social media management, I craft content that drives engagement,
+            builds trust, and delivers measurable results.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            My approach combines data-driven strategy with creative storytelling, ensuring
-            every piece of content serves a purpose and delivers measurable results for the
-            brands I work with.
+            I'm looking for my next challenge — a team where I can bring data-driven
+            creativity, strategic thinking, and a relentless drive to grow brands
+            through exceptional content.
           </p>
           <div className="flex gap-12 pt-4">
             {[
-              { number: "50+", label: "Projects Delivered" },
-              { number: "20+", label: "Happy Clients" },
+              { number: "50+", label: "Projects Completed" },
               { number: "2M+", label: "Content Reach" },
+              { number: "3+", label: "Years Experience" },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="text-3xl font-display font-bold text-foreground">{stat.number}</p>
