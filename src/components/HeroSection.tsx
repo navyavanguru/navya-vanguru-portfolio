@@ -1,8 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import heroImage from "@/assets/hero-portrait.png";
-
-const PARTICLE_COUNT = 40;
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -15,44 +13,89 @@ const HeroSection = () => {
   const textScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   const [phase, setPhase] = useState(0);
-  // 0=black, 1=color blast, 2=blast fading + image emerging, 3=fully revealed
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 400);
-    const t2 = setTimeout(() => setPhase(2), 1600);
-    const t3 = setTimeout(() => setPhase(3), 3200);
+    const t1 = setTimeout(() => setPhase(1), 300);
+    const t2 = setTimeout(() => setPhase(2), 2000);
+    const t3 = setTimeout(() => setPhase(3), 3600);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
-  // Generate random burst particles
-  const particles = useRef(
-    Array.from({ length: PARTICLE_COUNT }).map((_, i) => ({
-      id: i,
-      angle: (i / PARTICLE_COUNT) * 360 + (Math.random() - 0.5) * 30,
-      distance: 30 + Math.random() * 50,
-      size: 4 + Math.random() * 12,
-      color: [
-        "hsl(0, 0%, 100%)",
-        "hsl(0, 0%, 85%)",
-        "hsl(0, 0%, 70%)",
-        "hsl(0, 0%, 95%)",
-        "hsl(0, 0%, 60%)",
-      ][Math.floor(Math.random() * 5)],
-      delay: Math.random() * 0.3,
-      duration: 0.8 + Math.random() * 0.8,
-    }))
-  ).current;
+  // Paint splashes from left and right sides
+  const splashes = useMemo(() => {
+    const items: {
+      id: number;
+      side: "left" | "right";
+      startX: string;
+      endX: string;
+      startY: string;
+      endY: string;
+      width: number;
+      height: number;
+      rotation: number;
+      color: string;
+      delay: number;
+      duration: number;
+      borderRadius: string;
+    }[] = [];
 
-  // Shockwave rings
-  const rings = [
-    { delay: 0, scale: 2.5, duration: 1.2 },
-    { delay: 0.15, scale: 2, duration: 1.0 },
-    { delay: 0.3, scale: 1.5, duration: 0.8 },
-  ];
+    const greys = [
+      "hsl(0 0% 20%)",
+      "hsl(0 0% 30%)",
+      "hsl(0 0% 40%)",
+      "hsl(0 0% 50%)",
+      "hsl(0 0% 60%)",
+      "hsl(0 0% 70%)",
+      "hsl(0 0% 80%)",
+      "hsl(0 0% 15%)",
+      "hsl(0 0% 90%)",
+      "hsl(0 0% 25%)",
+    ];
+
+    for (let i = 0; i < 28; i++) {
+      const side = i % 2 === 0 ? "left" : "right";
+      const startX = side === "left" ? "-10%" : "110%";
+      const endX = `${20 + Math.random() * 60}%`;
+      const startY = `${10 + Math.random() * 80}%`;
+      const endY = `${(parseFloat(startY) + (Math.random() - 0.5) * 20)}%`;
+
+      items.push({
+        id: i,
+        side,
+        startX,
+        endX,
+        startY,
+        endY,
+        width: 60 + Math.random() * 180,
+        height: 40 + Math.random() * 120,
+        rotation: Math.random() * 360,
+        color: greys[Math.floor(Math.random() * greys.length)],
+        delay: Math.random() * 0.6,
+        duration: 0.6 + Math.random() * 0.6,
+        borderRadius: `${30 + Math.random() * 40}% ${30 + Math.random() * 40}% ${30 + Math.random() * 40}% ${30 + Math.random() * 40}%`,
+      });
+    }
+    return items;
+  }, []);
+
+  // Smaller splatter drips
+  const drips = useMemo(() => {
+    return Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      side: i % 2 === 0 ? "left" : "right",
+      startX: i % 2 === 0 ? "-5%" : "105%",
+      endX: `${15 + Math.random() * 70}%`,
+      y: `${5 + Math.random() * 90}%`,
+      size: 8 + Math.random() * 30,
+      color: `hsl(0 0% ${15 + Math.random() * 70}%)`,
+      delay: 0.1 + Math.random() * 0.8,
+      duration: 0.5 + Math.random() * 0.5,
+    }));
+  }, []);
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden bg-background">
-      {/* Background text BEHIND image */}
+      {/* Background text */}
       <div className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none">
         <motion.h1
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
@@ -65,95 +108,96 @@ const HeroSection = () => {
         </motion.h1>
       </div>
 
-      {/* === COLOR BLAST EFFECT === */}
+      {/* === PAINT SPLASH EFFECT === */}
       <AnimatePresence>
         {(phase === 1 || phase === 2) && (
-          <div className="absolute inset-0 z-[15] flex items-center justify-center pointer-events-none">
-            {/* Central flash */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: [0, 1.5, 3], opacity: [0, 1, 0] }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="absolute w-40 h-40 rounded-full"
-              style={{
-                background: "radial-gradient(circle, hsl(0 0% 100% / 0.9), hsl(0 0% 80% / 0.5), transparent)",
-                filter: "blur(20px)",
-              }}
-            />
-
-            {/* Shockwave rings */}
-            {rings.map((ring, i) => (
+          <div className="absolute inset-0 z-[15] pointer-events-none overflow-hidden">
+            {/* Large paint splashes */}
+            {splashes.map((s) => (
               <motion.div
-                key={i}
-                initial={{ scale: 0, opacity: 0.8 }}
-                animate={{ scale: ring.scale, opacity: 0 }}
-                transition={{ duration: ring.duration, delay: ring.delay, ease: "easeOut" }}
-                className="absolute w-64 h-64 rounded-full border-2 border-foreground/30"
+                key={s.id}
+                className="absolute"
+                style={{
+                  top: s.startY,
+                  width: s.width,
+                  height: s.height,
+                  borderRadius: s.borderRadius,
+                  background: s.color,
+                  rotate: s.rotation,
+                  filter: "blur(2px)",
+                }}
+                initial={{ left: s.startX, opacity: 0, scale: 0.3 }}
+                animate={{
+                  left: s.endX,
+                  top: s.endY,
+                  opacity: [0, 0.85, 0.7, 0],
+                  scale: [0.3, 1.2, 1, 0.8],
+                }}
+                transition={{
+                  duration: s.duration + 1,
+                  delay: s.delay,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               />
             ))}
 
-            {/* Burst particles */}
-            {particles.map((p) => {
-              const rad = (p.angle * Math.PI) / 180;
-              const endX = Math.cos(rad) * p.distance + "vw";
-              const endY = Math.sin(rad) * p.distance + "vh";
-              return (
-                <motion.div
-                  key={p.id}
-                  initial={{ x: 0, y: 0, scale: 0, opacity: 1 }}
-                  animate={{
-                    x: endX,
-                    y: endY,
-                    scale: [0, 1.5, 0],
-                    opacity: [1, 0.8, 0],
-                  }}
-                  transition={{
-                    duration: p.duration,
-                    delay: p.delay,
-                    ease: "easeOut",
-                  }}
-                  className="absolute rounded-full"
-                  style={{
-                    width: p.size,
-                    height: p.size,
-                    background: p.color,
-                    filter: "blur(1px)",
-                    boxShadow: `0 0 ${p.size * 2}px ${p.color}`,
-                  }}
-                />
-              );
-            })}
+            {/* Smaller splatter dots */}
+            {drips.map((d) => (
+              <motion.div
+                key={`drip-${d.id}`}
+                className="absolute rounded-full"
+                style={{
+                  top: d.y,
+                  width: d.size,
+                  height: d.size,
+                  background: d.color,
+                }}
+                initial={{ left: d.startX, opacity: 0, scale: 0 }}
+                animate={{
+                  left: d.endX,
+                  opacity: [0, 1, 0.6, 0],
+                  scale: [0, 1.5, 1, 0],
+                }}
+                transition={{
+                  duration: d.duration + 0.8,
+                  delay: d.delay,
+                  ease: "easeOut",
+                }}
+              />
+            ))}
+
+            {/* Center wash — big grey splash where they meet */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: [0, 2, 3.5], opacity: [0, 0.5, 0] }}
+              transition={{ duration: 1.8, delay: 0.4, ease: "easeOut" }}
+              style={{
+                width: 300,
+                height: 300,
+                borderRadius: "40% 60% 55% 45%",
+                background: "radial-gradient(circle, hsl(0 0% 50% / 0.6), hsl(0 0% 30% / 0.3), transparent)",
+                filter: "blur(30px)",
+              }}
+            />
           </div>
         )}
       </AnimatePresence>
 
-      {/* Screen flash overlay */}
-      <motion.div
-        className="absolute inset-0 z-[14] pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={
-          phase >= 1
-            ? { opacity: [0, 0.6, 0], background: "hsl(0 0% 100%)" }
-            : {}
-        }
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      />
-
-      {/* === IMAGE — fades in slowly after blast === */}
+      {/* === IMAGE — emerges slowly after splash === */}
       <motion.div
         className="absolute inset-0 z-10 flex items-end justify-center"
         style={{ y: imageY }}
       >
         <motion.div
           className="relative h-[90vh] sm:h-[92vh] md:h-[95vh] w-auto flex items-end justify-center"
-          initial={{ opacity: 0, scale: 1.1 }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={
             phase >= 2
               ? { opacity: 1, scale: 1 }
-              : { opacity: 0, scale: 1.1 }
+              : { opacity: 0, scale: 1.05 }
           }
-          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
         >
           <img
             src={heroImage}
