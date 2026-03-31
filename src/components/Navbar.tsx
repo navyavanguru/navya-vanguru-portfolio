@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Portfolio", href: "#portfolio" },
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];
@@ -32,7 +32,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
         <a href="#" className="font-display text-xl font-semibold text-foreground tracking-tight">
-          Portfolio<span className="text-muted-foreground">.</span>
+          Navya<span className="text-muted-foreground">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -49,7 +49,7 @@ const Navbar = () => {
             href="#contact"
             className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
-            Let's Talk
+            Hire Me
           </a>
         </div>
 
@@ -85,7 +85,7 @@ const Navbar = () => {
             onClick={() => setMobileOpen(false)}
             className="mt-2 block text-center text-sm font-medium bg-primary text-primary-foreground px-5 py-3 rounded-full"
           >
-            Let's Talk
+            Hire Me
           </a>
         </motion.div>
       )}
