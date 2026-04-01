@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect, useMemo } from "react";
 import heroImage from "@/assets/hero-portrait.png";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -294,14 +295,16 @@ const HeroSection = () => {
 
       {/* Foreground text */}
       <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col items-center pb-10 md:pb-16 px-6 text-center pointer-events-none">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={phase >= 3 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none"
+          className="pointer-events-auto"
         >
-          Navya
-        </motion.h2>
+          <LiquidButton size="xxl" variant="default" className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none h-auto px-8 py-4">
+            Navya
+          </LiquidButton>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
