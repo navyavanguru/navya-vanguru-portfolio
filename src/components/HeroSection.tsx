@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect, useMemo } from "react";
 import heroImage from "@/assets/hero-portrait.png";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
