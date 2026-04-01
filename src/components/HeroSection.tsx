@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import heroImage from "@/assets/hero-portrait.png";
 
 const HeroSection = () => {
@@ -15,120 +15,10 @@ const HeroSection = () => {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 200);
-    const t2 = setTimeout(() => setPhase(2), 2200);
-    const t3 = setTimeout(() => setPhase(3), 3800);
+    const t1 = setTimeout(() => setPhase(1), 300);   // slashes start
+    const t2 = setTimeout(() => setPhase(2), 2000);   // image emerges
+    const t3 = setTimeout(() => setPhase(3), 3200);   // text appears
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, []);
-
-  // Generate spray particles — like paint being flung from both sides
-  const particles = useMemo(() => {
-    const items: {
-      id: number;
-      side: "left" | "right";
-      startX: number;
-      startY: number;
-      // Control points for the arc trajectory
-      endX: number;
-      endY: number;
-      size: number;
-      color: string;
-      delay: number;
-      duration: number;
-      rotation: number;
-      stretch: number;
-    }[] = [];
-
-    const greys = [
-      "hsl(0, 0%, 95%)",
-      "hsl(0, 0%, 85%)",
-      "hsl(0, 0%, 75%)",
-      "hsl(0, 0%, 65%)",
-      "hsl(0, 0%, 55%)",
-      "hsl(0, 0%, 45%)",
-      "hsl(0, 0%, 35%)",
-      "hsl(0, 0%, 25%)",
-      "hsl(0, 0%, 15%)",
-      "hsl(0, 0%, 10%)",
-    ];
-
-    // Create waves of particles from each side
-    for (let wave = 0; wave < 4; wave++) {
-      const waveDelay = wave * 0.15;
-      const particlesPerWave = 30;
-
-      for (let i = 0; i < particlesPerWave; i++) {
-        const side: "left" | "right" = i % 2 === 0 ? "left" : "right";
-        const originY = 30 + Math.random() * 40; // spray origin roughly center
-
-        // Spray spreads out in a cone from the side
-        const spreadAngle = (Math.random() - 0.5) * 120; // degrees spread
-        const distance = 30 + Math.random() * 50; // how far it travels (% of viewport)
-
-        const angleRad = (spreadAngle * Math.PI) / 180;
-        const endX = side === "left"
-          ? distance * Math.cos(angleRad)
-          : 100 - distance * Math.cos(angleRad);
-        const endY = originY + distance * Math.sin(angleRad) * 0.5;
-
-        items.push({
-          id: wave * particlesPerWave + i,
-          side,
-          startX: side === "left" ? -5 : 105,
-          startY: originY + (Math.random() - 0.5) * 15,
-          endX: Math.max(5, Math.min(95, endX)),
-          endY: Math.max(5, Math.min(95, endY)),
-          size: 4 + Math.random() * 24,
-          color: greys[Math.floor(Math.random() * greys.length)],
-          delay: waveDelay + Math.random() * 0.3,
-          duration: 0.4 + Math.random() * 0.5,
-          rotation: Math.random() * 360,
-          stretch: 1 + Math.random() * 2.5,
-        });
-      }
-    }
-    return items;
-  }, []);
-
-  // Larger paint globs that splatter
-  const globs = useMemo(() => {
-    return Array.from({ length: 16 }).map((_, i) => {
-      const side: "left" | "right" = i % 2 === 0 ? "left" : "right";
-      return {
-        id: i,
-        side,
-        startX: side === "left" ? -8 : 108,
-        endX: side === "left" ? 15 + Math.random() * 35 : 50 + Math.random() * 35,
-        startY: 25 + Math.random() * 50,
-        endY: 20 + Math.random() * 60,
-        width: 40 + Math.random() * 100,
-        height: 30 + Math.random() * 60,
-        color: `hsl(0, 0%, ${10 + Math.random() * 80}%)`,
-        delay: 0.1 + Math.random() * 0.5,
-        duration: 0.5 + Math.random() * 0.4,
-        rotation: Math.random() * 360,
-        borderRadius: `${30 + Math.random() * 40}% ${30 + Math.random() * 40}% ${30 + Math.random() * 40}% ${30 + Math.random() * 40}%`,
-      };
-    });
-  }, []);
-
-  // Trailing drip lines
-  const trails = useMemo(() => {
-    return Array.from({ length: 12 }).map((_, i) => {
-      const side: "left" | "right" = i % 2 === 0 ? "left" : "right";
-      return {
-        id: i,
-        side,
-        startX: side === "left" ? -3 : 103,
-        endX: side === "left" ? 10 + Math.random() * 40 : 50 + Math.random() * 40,
-        y: 20 + Math.random() * 60,
-        width: 50 + Math.random() * 150,
-        height: 2 + Math.random() * 4,
-        color: `hsl(0, 0%, ${20 + Math.random() * 60}%)`,
-        delay: Math.random() * 0.4,
-        duration: 0.3 + Math.random() * 0.3,
-      };
-    });
   }, []);
 
   return (
@@ -146,137 +36,76 @@ const HeroSection = () => {
         </motion.h1>
       </div>
 
-      {/* === PAINT SPRAY EFFECT === */}
-      <AnimatePresence>
-        {(phase === 1 || phase === 2) && (
-          <div className="absolute inset-0 z-[15] pointer-events-none overflow-hidden">
+      {/* === DIAGONAL SLASH REVEAL === */}
+      {phase < 3 && (
+        <div className="absolute inset-0 z-[25] pointer-events-none overflow-hidden">
+          {/* Black cover that gets slashed away */}
+          <motion.div
+            className="absolute inset-0 bg-background"
+            initial={{ opacity: 1 }}
+            animate={phase >= 2 ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+          />
 
-            {/* Spray particles — small fast droplets */}
-            {particles.map((p) => (
-              <motion.div
-                key={`p-${p.id}`}
-                className="absolute rounded-full"
-                style={{
-                  width: p.size,
-                  height: p.size / p.stretch,
-                  background: p.color,
-                  rotate: p.rotation,
-                  filter: p.size > 15 ? "blur(1px)" : "none",
-                }}
-                initial={{
-                  left: `${p.startX}%`,
-                  top: `${p.startY}%`,
-                  opacity: 0,
-                  scale: 0.2,
-                }}
-                animate={{
-                  left: `${p.endX}%`,
-                  top: `${p.endY}%`,
-                  opacity: [0, 1, 0.9, 0],
-                  scale: [0.2, 1.3, 1, 0.5],
-                }}
-                transition={{
-                  duration: p.duration + 1.2,
-                  delay: p.delay,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              />
-            ))}
-
-            {/* Paint globs — larger organic shapes */}
-            {globs.map((g) => (
-              <motion.div
-                key={`g-${g.id}`}
-                className="absolute"
-                style={{
-                  width: g.width,
-                  height: g.height,
-                  background: g.color,
-                  borderRadius: g.borderRadius,
-                  rotate: g.rotation,
-                  filter: "blur(3px)",
-                }}
-                initial={{
-                  left: `${g.startX}%`,
-                  top: `${g.startY}%`,
-                  opacity: 0,
-                  scale: 0.3,
-                }}
-                animate={{
-                  left: `${g.endX}%`,
-                  top: `${g.endY}%`,
-                  opacity: [0, 0.7, 0.5, 0],
-                  scale: [0.3, 1.1, 0.9, 0.6],
-                }}
-                transition={{
-                  duration: g.duration + 1.4,
-                  delay: g.delay,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              />
-            ))}
-
-            {/* Trail streaks */}
-            {trails.map((t) => (
-              <motion.div
-                key={`t-${t.id}`}
-                className="absolute"
-                style={{
-                  width: t.width,
-                  height: t.height,
-                  background: `linear-gradient(${t.side === "left" ? "to right" : "to left"}, ${t.color}, transparent)`,
-                  top: `${t.y}%`,
-                  borderRadius: "999px",
-                }}
-                initial={{
-                  left: `${t.startX}%`,
-                  opacity: 0,
-                  scaleX: 0.1,
-                }}
-                animate={{
-                  left: `${t.endX}%`,
-                  opacity: [0, 0.6, 0.3, 0],
-                  scaleX: [0.1, 1, 0.8, 0.3],
-                }}
-                transition={{
-                  duration: t.duration + 1,
-                  delay: t.delay,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              />
-            ))}
-
-            {/* Center collision mist */}
+          {/* Diagonal slashes - soft grey strokes */}
+          {[
+            { rotate: -25, x: "-120%", xEnd: "120%", y: "30%", delay: 0, w: "200%", h: "8vh", opacity: 0.4 },
+            { rotate: -20, x: "120%", xEnd: "-120%", y: "45%", delay: 0.15, w: "200%", h: "12vh", opacity: 0.25 },
+            { rotate: -30, x: "-120%", xEnd: "120%", y: "55%", delay: 0.25, w: "200%", h: "6vh", opacity: 0.35 },
+            { rotate: -15, x: "120%", xEnd: "-120%", y: "65%", delay: 0.35, w: "200%", h: "15vh", opacity: 0.2 },
+            { rotate: -22, x: "-120%", xEnd: "120%", y: "40%", delay: 0.1, w: "200%", h: "20vh", opacity: 0.15 },
+            { rotate: -28, x: "120%", xEnd: "-120%", y: "50%", delay: 0.2, w: "200%", h: "10vh", opacity: 0.3 },
+          ].map((slash, i) => (
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: [0, 2.5, 4], opacity: [0, 0.4, 0] }}
-              transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
+              key={i}
+              className="absolute left-1/2 -translate-x-1/2"
               style={{
-                width: 400,
-                height: 400,
-                borderRadius: "50%",
-                background: "radial-gradient(circle, hsl(0 0% 60% / 0.5), hsl(0 0% 40% / 0.2), transparent)",
-                filter: "blur(40px)",
+                width: slash.w,
+                height: slash.h,
+                top: slash.y,
+                rotate: slash.rotate,
+                background: `linear-gradient(90deg, transparent, hsl(var(--foreground) / ${slash.opacity}), hsl(var(--foreground) / ${slash.opacity * 1.5}), hsl(var(--foreground) / ${slash.opacity}), transparent)`,
+                filter: "blur(8px)",
+              }}
+              initial={{ x: slash.x, opacity: 0 }}
+              animate={phase >= 1
+                ? { x: slash.xEnd, opacity: [0, 1, 1, 0] }
+                : { x: slash.x, opacity: 0 }
+              }
+              transition={{
+                duration: 1.6,
+                delay: slash.delay,
+                ease: [0.22, 1, 0.36, 1],
               }}
             />
-          </div>
-        )}
-      </AnimatePresence>
+          ))}
 
-      {/* === IMAGE — emerges slowly after spray === */}
+          {/* Subtle center glow as slashes cross */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            style={{
+              width: "60vw",
+              height: "60vh",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, hsl(var(--foreground) / 0.08), transparent 70%)",
+              filter: "blur(40px)",
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={phase >= 1 ? { scale: [0, 1.5, 2], opacity: [0, 0.6, 0] } : {}}
+            transition={{ duration: 2, delay: 0.4, ease: "easeOut" }}
+          />
+        </div>
+      )}
+
+      {/* === IMAGE === */}
       <motion.div
         className="absolute inset-0 z-10 flex items-end justify-center"
         style={{ y: imageY }}
       >
         <motion.div
           className="relative h-[90vh] sm:h-[92vh] md:h-[95vh] w-auto flex items-end justify-center"
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={
-            phase >= 2
-              ? { opacity: 1, scale: 1 }
-              : { opacity: 0, scale: 1.08 }
-          }
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={phase >= 2 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }}
           transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <img
