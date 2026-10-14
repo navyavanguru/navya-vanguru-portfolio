@@ -5,23 +5,23 @@ import { FileText, Video, Megaphone, Lightbulb } from "lucide-react";
 const services = [
   {
     icon: FileText,
-    title: "Content Writing",
-    description: "SEO-optimized blogs, articles, and web copy that educate, engage, and drive organic growth for your brand.",
+    title: "Strategic Copywriting",
+    description: "SEO-optimized blogs and web copy designed to capture authority, improve search ranking, and guide your audience through the 'Hook, Story, Offer' framework.",
   },
   {
     icon: Video,
-    title: "Video Script Writing",
-    description: "Compelling scripts for YouTube, reels, ads, and branded videos that capture attention and tell your story.",
+    title: "High-Impact Video Scripting",
+    description: "Specialized scripts for YouTube, Reels, and branded docs that focus on immediate retention and emotional arcs that turn casual viewers into fans.",
   },
   {
     icon: Megaphone,
-    title: "Social Media Management",
-    description: "End-to-end social media strategy, content calendars, posting, and analytics to grow your online presence.",
+    title: "Community Growth",
+    description: "More than just social media management—I build digital communities through consistent brand voice, narrative consistency, and data-backed engagement tactics.",
   },
   {
     icon: Lightbulb,
-    title: "Content Strategy",
-    description: "Data-driven content roadmaps that align with your business goals, audience needs, and market trends.",
+    title: "Narrative & Brand Strategy",
+    description: "Architecting a multi-channel content roadmap that defines your brand's unique soul while aligning with your long-term business and growth metrics.",
   },
 ];
 
@@ -39,10 +39,10 @@ const ServicesSection = () => {
           className="text-center mb-20"
         >
           <p className="text-sm tracking-[0.25em] uppercase text-muted-foreground font-medium mb-4">
-            What I Offer
+            Expertise
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
-            Services
+            What I Offer
           </h2>
         </motion.div>
 

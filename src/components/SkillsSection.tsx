@@ -5,26 +5,26 @@ import { PenLine, Share2, BarChart3, Code } from "lucide-react";
 const categories = [
   {
     icon: PenLine,
-    title: "Content Creation",
-    skills: ["Blog Writing", "Video Scripting", "Copywriting", "SEO Content", "Email Campaigns"],
+    title: "Strategic Writing",
+    skills: ["Performance Copywriting", "Video Scripting", "B2B Blogging", "SEO Content Design", "Newsletter Strategy"],
   },
   {
     icon: Share2,
-    title: "Social Media",
-    skills: ["Instagram Strategy", "LinkedIn Growth", "Content Calendars", "Community Building", "Analytics"],
+    title: "Growth & Narrative",
+    skills: ["IG/LinkedIn Strategy", "Community Building", "Brand Storytelling", "Content Calendars", "Retention Tactics"],
   },
   {
     icon: BarChart3,
-    title: "Marketing Tools",
-    skills: ["Google Analytics", "Canva Pro", "Meta Business Suite", "Mailchimp", "Hootsuite"],
+    title: "Digital Strategy",
+    skills: ["AI Workflow Design", "Google Analytics 4", "Meta Business Suite", "Market Research", "Conversion Audits"],
   },
   {
     icon: Code,
-    title: "Basic Tech",
-    skills: ["HTML & CSS", "WordPress", "Notion", "AI Tools", "Basic SEO"],
-    badge: "Learning",
+    title: "Creative Tech",
+    skills: ["Midjourney/DALL-E", "HTML & CSS", "WordPress/Webflow", "Video Editing Basics", "CMS Management"],
   },
 ];
+
 
 const SkillsSection = () => {
   const ref = useRef(null);
@@ -62,11 +62,7 @@ const SkillsSection = () => {
               <h3 className="font-display text-xl font-semibold text-foreground mb-1">
                 {cat.title}
               </h3>
-              {cat.badge && (
-                <span className="inline-block text-xs font-medium text-muted-foreground bg-accent px-2 py-0.5 rounded-full mb-4">
-                  {cat.badge}
-                </span>
-              )}
+
               <ul className="mt-4 space-y-2.5">
                 {cat.skills.map((skill) => (
                   <li key={skill} className="text-sm text-muted-foreground flex items-center gap-2">

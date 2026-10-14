@@ -17,9 +17,9 @@ const AboutSection = () => {
             About Me
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground leading-tight">
-            Turning Ideas Into
+            Where Strategy Meets 
             <br />
-            <span className="text-gradient">Impactful Content</span>
+            <span className="text-gradient">Meaningful Storytelling</span>
           </h2>
         </motion.div>
 
@@ -29,20 +29,20 @@ const AboutSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            I'm a digital marketer and content strategist passionate about
-            storytelling that moves people. With expertise in blog writing, video scripting,
-            and social media management, I craft content that drives engagement,
-            builds trust, and delivers measurable results.
+          <p className="text-lg text-muted-foreground leading-relaxed font-light">
+            I’m Navya, a digital strategist who believes that every brand has a pulse, 
+            and every pulse has a story waiting to be told. I specialize in bridging 
+            the gap between complex data and human emotion—crafting content that 
+            doesn't just fill space, but builds deep, lasting loyalty.
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            I'm looking for my next challenge — a team where I can bring data-driven
-            creativity, strategic thinking, and a relentless drive to grow brands
-            through exceptional content.
+          <p className="text-lg text-muted-foreground leading-relaxed font-light">
+            My approach combines the precision of SEO with the nuance of creative 
+            direction. Whether it's a high-retention video script or a thought-leadership 
+            blog, I focus on the 'why' behind the scroll.
           </p>
           <div className="flex gap-12 pt-4">
             {[
-              { number: "50+", label: "Projects Completed" },
+              { number: "50+", label: "Portfolios Directed" },
               { number: "2M+", label: "Content Reach" },
               { number: "3+", label: "Years Experience" },
             ].map((stat) => (

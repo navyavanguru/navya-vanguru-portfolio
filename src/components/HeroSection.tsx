@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import heroImage from "@/assets/hero-portrait.png";
 
@@ -9,160 +9,179 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const textScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+  // Scroll Parallax
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const bgTextY = useTransform(scrollYProgress, [0, 1], [0, 300]);
+
+  // Mouse Parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Springs for smoothness
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  // Transforms for mouse movement
+  const mouseMoveImageX = useTransform(springX, [-0.5, 0.5], ["-20px", "20px"]);
+  const mouseMoveImageY = useTransform(springY, [-0.5, 0.5], ["-20px", "20px"]);
+  const mouseMoveTextX = useTransform(springX, [-0.5, 0.5], ["-10px", "10px"]);
+  const mouseMoveTextY = useTransform(springY, [-0.5, 0.5], ["-10px", "10px"]);
 
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 300);   // slashes start
-    const t2 = setTimeout(() => setPhase(2), 2000);   // image emerges
-    const t3 = setTimeout(() => setPhase(3), 3200);   // text appears
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    // Quick reveal after Splash
+    const timers = [
+      setTimeout(() => setPhase(1), 50),
+      setTimeout(() => setPhase(2), 600),
+      setTimeout(() => setPhase(3), 1800),
+    ];
+    return () => timers.forEach(clearTimeout);
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX / width) - 0.5;
+    const y = (e.clientY / height) - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
-    <section ref={ref} className="relative h-screen overflow-hidden bg-background">
-      {/* Background text */}
-      <div className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none">
+    <section 
+      ref={ref} 
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-screen w-full overflow-hidden bg-[#0A0A0A] selection:bg-white selection:text-black"
+    >
+      {/* Background Floating Name (Extra depth layer) */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none">
         <motion.h1
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={phase >= 3 ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0 }}
-          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-          style={{ scale: textScale }}
-          className="font-display text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[12vw] font-bold text-foreground/10 leading-none tracking-tighter select-none"
+          style={{ y: bgTextY, x: mouseMoveTextX }}
+          className="font-display text-[25vw] font-bold text-white/[0.02] leading-none tracking-tighter"
         >
-          Navya
+          NAVYA
         </motion.h1>
       </div>
 
-      {/* === DIAGONAL SLASH REVEAL === */}
-      {phase < 3 && (
-        <div className="absolute inset-0 z-[25] pointer-events-none overflow-hidden">
-          {/* Black cover that gets slashed away */}
-          <motion.div
-            className="absolute inset-0 bg-background"
-            initial={{ opacity: 1 }}
-            animate={phase >= 2 ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          />
-
-          {/* Diagonal slashes - soft grey strokes */}
-          {[
-            { rotate: -25, x: "-120%", xEnd: "120%", y: "30%", delay: 0, w: "200%", h: "8vh", opacity: 0.4 },
-            { rotate: -20, x: "120%", xEnd: "-120%", y: "45%", delay: 0.15, w: "200%", h: "12vh", opacity: 0.25 },
-            { rotate: -30, x: "-120%", xEnd: "120%", y: "55%", delay: 0.25, w: "200%", h: "6vh", opacity: 0.35 },
-            { rotate: -15, x: "120%", xEnd: "-120%", y: "65%", delay: 0.35, w: "200%", h: "15vh", opacity: 0.2 },
-            { rotate: -22, x: "-120%", xEnd: "120%", y: "40%", delay: 0.1, w: "200%", h: "20vh", opacity: 0.15 },
-            { rotate: -28, x: "120%", xEnd: "-120%", y: "50%", delay: 0.2, w: "200%", h: "10vh", opacity: 0.3 },
-          ].map((slash, i) => (
-            <motion.div
-              key={i}
-              className="absolute left-1/2 -translate-x-1/2"
-              style={{
-                width: slash.w,
-                height: slash.h,
-                top: slash.y,
-                rotate: slash.rotate,
-                background: `linear-gradient(90deg, transparent, hsl(var(--foreground) / ${slash.opacity}), hsl(var(--foreground) / ${slash.opacity * 1.5}), hsl(var(--foreground) / ${slash.opacity}), transparent)`,
-                filter: "blur(8px)",
-              }}
-              initial={{ x: slash.x, opacity: 0 }}
-              animate={phase >= 1
-                ? { x: slash.xEnd, opacity: [0, 1, 1, 0] }
-                : { x: slash.x, opacity: 0 }
-              }
-              transition={{
-                duration: 1.6,
-                delay: slash.delay,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+      {/* 1. INITIAL BLACK COVER & SLASH REVEAL */}
+      <AnimatePresence>
+        {phase < 3 && (
+          <motion.div 
+            className="absolute inset-0 z-[50] flex items-center justify-center pointer-events-none"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          >
+            <motion.div 
+              className="absolute inset-0 bg-black"
+              animate={phase >= 2 ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 2, ease: [0.4, 0, 0.2, 1] }}
             />
-          ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          {/* Subtle center glow as slashes cross */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              width: "60vw",
-              height: "60vh",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, hsl(var(--foreground) / 0.08), transparent 70%)",
-              filter: "blur(40px)",
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={phase >= 1 ? { scale: [0, 1.5, 2], opacity: [0, 0.6, 0] } : {}}
-            transition={{ duration: 2, delay: 0.4, ease: "easeOut" }}
-          />
-        </div>
-      )}
-
-      {/* === IMAGE === */}
+      {/* 2. BACKGROUND IMAGE REVEAL (Parallax Layer) */}
       <motion.div
-        className="absolute inset-0 z-10 flex items-end justify-center"
-        style={{ y: imageY }}
+        className="absolute inset-x-0 top-0 z-10 h-full flex items-center justify-center pt-[2vh]"
+        style={{ 
+          y: imageY, 
+          scale: imageScale,
+          translateX: mouseMoveImageX,
+          translateY: mouseMoveImageY
+        }}
       >
         <motion.div
-          className="relative h-[90vh] sm:h-[92vh] md:h-[95vh] w-auto flex items-end justify-center"
-          initial={{ opacity: 0, scale: 1.06 }}
-          animate={phase >= 2 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }}
-          transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-full w-full flex items-start justify-center"
+          initial={{ opacity: 0, filter: "blur(10px) brightness(0.5) grayscale(1)" }}
+          animate={phase >= 2 ? { 
+            opacity: 1, 
+            filter: "blur(0px) brightness(1) grayscale(1)",
+          } : {}}
+          transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
         >
           <img
             src={heroImage}
-            alt="Navya — Digital Marketer"
-            className="h-full w-auto max-w-none object-contain object-bottom grayscale"
-            width={1024}
-            height={1280}
+            alt="Navya"
+            className="h-[80vh] md:h-[85vh] w-auto object-contain object-top opacity-80"
           />
+          {/* Enhanced bottom fade to clear space for text */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
         </motion.div>
       </motion.div>
 
-      {/* Bottom gradient */}
-      <div className="absolute inset-x-0 bottom-0 z-20 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-
-      {/* Foreground text */}
-      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col items-center pb-10 md:pb-16 px-6 text-center pointer-events-none">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={phase >= 3 ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-none"
-        >
-          Navya
-        </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={phase >= 3 ? { opacity: 1 } : {}}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-          className="mt-3 md:mt-4 overflow-hidden"
-        >
-          <motion.p
-            initial={{ y: 16 }}
-            animate={phase >= 3 ? { y: 0 } : {}}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="text-xs md:text-sm tracking-[0.35em] uppercase text-muted-foreground font-light"
+      {/* 3. TEXT ANIMATIONS (Parallax Layer) */}
+      <motion.div 
+        className="absolute inset-0 z-20 flex flex-col items-center justify-end pb-[2vh] md:pb-[4vh] px-6 text-center pointer-events-none"
+        style={{ y: textY, x: mouseMoveTextX }}
+      >
+        <div className="relative overflow-hidden">
+          <motion.h1
+            className="font-display text-[15vw] md:text-[12vw] font-bold leading-none tracking-tighter text-white/90 mix-blend-difference"
+            initial={{ y: "110%", skewY: 10 }}
+            animate={phase >= 3 ? { y: 0, skewY: 0 } : {}}
+            transition={{ 
+              duration: 1.8, 
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.2 
+            }}
           >
-            Digital Marketer
-          </motion.p>
+            Navya
+          </motion.h1>
+          <motion.h1
+            className="absolute inset-0 font-display text-[15vw] md:text-[12vw] font-bold leading-none tracking-tighter text-white/10 blur-[2px]"
+            initial={{ y: "110%", skewY: 10 }}
+            animate={phase >= 3 ? { y: 0, skewY: 0 } : {}}
+            transition={{ 
+              duration: 2, 
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.25 
+            }}
+          >
+            Navya
+          </motion.h1>
+        </div>
+
+        <motion.div
+          className="mt-4 overflow-hidden"
+          initial={{ opacity: 0, y: 10 }}
+          animate={phase >= 3 ? { opacity: 1, y: 0 } : {}}
+          transition={{ 
+            duration: 1.5, 
+            ease: "easeOut", 
+            delay: 1.2 
+          }}
+        >
+          <span className="text-xs md:text-sm tracking-[0.6em] uppercase text-white/40 font-light">
+            Digital Content Specialist & Storyteller
+          </span>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={phase >= 3 ? { opacity: 1 } : {}}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="mt-8"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent mx-auto"
-          />
-        </motion.div>
+          initial={{ opacity: 0, height: 0 }}
+          animate={phase >= 3 ? { opacity: 1, height: 60 } : {}}
+          transition={{ delay: 2.2, duration: 1.5 }}
+          className="mt-12 w-px bg-gradient-to-b from-white/30 to-transparent"
+        />
+      </motion.div>
+
+      {/* Background Ambience Layer */}
+      <div className="absolute inset-0 z-0 bg-[#0A0A0A]">
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)`
+        }} />
       </div>
     </section>
   );
 };
 
 export default HeroSection;
+
+

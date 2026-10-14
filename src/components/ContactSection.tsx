@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, Linkedin, FileDown } from "lucide-react";
+import { Mail, Linkedin, Instagram, FileDown } from "lucide-react";
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -40,7 +40,7 @@ const ContactSection = () => {
             Email Me
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/navyavanguru"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:bg-accent transition-colors"
@@ -49,11 +49,13 @@ const ContactSection = () => {
             LinkedIn
           </a>
           <a
-            href="#"
+            href="https://www.instagram.com/navya_vanguru?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 border border-border text-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:bg-accent transition-colors"
           >
-            <FileDown className="w-4 h-4" />
-            Download Resume
+            <Instagram className="w-4 h-4" />
+            Instagram
           </a>
         </motion.div>
       </div>

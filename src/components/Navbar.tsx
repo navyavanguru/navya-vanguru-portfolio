@@ -1,96 +1,98 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { User, Code, Briefcase, Mail, Home, Layers, Sparkles } from "lucide-react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "#about", icon: User },
+  { label: "Skills", href: "#skills", icon: Code },
+  { label: "Portfolio", href: "#portfolio", icon: Briefcase },
+  { label: "Services", href: "#services", icon: Sparkles },
+  { label: "Contact", href: "#contact", icon: Mail },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-        <a href="#" className="font-display text-xl font-semibold text-foreground tracking-tight">
-          Navya<span className="text-muted-foreground">.</span>
-        </a>
-
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
-          >
-            Hire Me
-          </a>
+    <div className="fixed top-6 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className={`
+          relative flex items-center gap-1 p-1.5 rounded-full pointer-events-auto
+          transition-all duration-500 ease-[0.22, 1, 0.36, 1]
+          ${scrolled 
+            ? "bg-black/40 backdrop-blur-3xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
+            : "bg-black/20 backdrop-blur-2xl border border-white/5"
+          }
+        `}
+      >
+        {/* Desktop Links */}
+        <div className="flex items-center">
+          {navLinks.map((link) => {
+            const Icon = link.icon;
+            const isHovered = hovered === link.href;
+            
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                title={link.label}
+                onMouseEnter={() => setHovered(link.href)}
+                onMouseLeave={() => setHovered(null)}
+                className="relative flex items-center px-5 py-4 md:px-4 md:py-2 group overflow-hidden"
+              >
+                <div className="relative z-10 flex items-center gap-2">
+                  <Icon className={`transition-colors duration-300 w-5 h-5 md:w-4 md:h-4 ${isHovered ? "text-white" : "text-white/60"}`} />
+                  <span className={`text-xs font-medium tracking-wide transition-all duration-300 hidden md:block ${isHovered ? "text-white" : "text-white/50"}`}>
+                    {link.label}
+                  </span>
+                </div>
+                
+                {/* macOS Hover Indicator */}
+                {isHovered && (
+                  <motion.div
+                    layoutId="nav-hover"
+                    className="absolute inset-x-1 inset-y-1 bg-white/10 rounded-full -z-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
         </div>
 
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-6 h-0.5 bg-foreground transition-transform duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-foreground transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-foreground transition-transform duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
-      </div>
+        {/* Separator */}
+        <div className="w-px h-6 bg-white/10 mx-1 hidden md:block" />
 
-      {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border px-6 pb-6 pt-2"
+        {/* Action Button - Compact */}
+        <a
+          href="#contact"
+          className="relative flex items-center justify-center p-2 md:px-5 md:py-2 rounded-full bg-white transition-all duration-300 hover:scale-105 active:scale-95 group shadow-lg"
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block py-3 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={() => setMobileOpen(false)}
-            className="mt-2 block text-center text-sm font-medium bg-primary text-primary-foreground px-5 py-3 rounded-full"
-          >
+          <span className="text-[10px] md:text-xs font-bold text-black uppercase tracking-widest hidden md:block">
             Hire Me
-          </a>
-        </motion.div>
-      )}
-    </motion.nav>
+          </span>
+          <Mail size={14} className="text-black md:hidden" />
+          
+          {/* Subtle Glow */}
+          <div className="absolute inset-0 rounded-full bg-white blur-md opacity-0 group-hover:opacity-20 transition-opacity" />
+        </a>
+      </motion.nav>
+    </div>
   );
 };
 
 export default Navbar;
+
