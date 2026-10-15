@@ -1,11 +1,13 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "navya-digital-storyteller-portfolio",
+  "version": "1.0.0",
+  "description": "Cinematic portfolio for Navya Vanguru - Digital Content Specialist & Storyteller",
+  "homepage": "https://navyavanguru.github.io/digital-storyteller-portfolio",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp dist/index.html dist/404.html",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
