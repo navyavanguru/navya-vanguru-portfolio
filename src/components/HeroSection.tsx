@@ -23,13 +23,9 @@ const HeroSection = () => {
   const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
-  // Transforms for mouse & touch movement
-  const mouseMoveImageX = useTransform(springX, [-0.5, 0.5], ["-24px", "24px"]);
-  const mouseMoveImageY = useTransform(springY, [-0.5, 0.5], ["-16px", "16px"]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-18, 18]);
-  const rotateX = useTransform(springY, [-0.5, 0.5], [14, -14]);
-  const rotateZ = useTransform(springX, [-0.5, 0.5], [-3, 3]);
-
+  // Transforms for mouse movement
+  const mouseMoveImageX = useTransform(springX, [-0.5, 0.5], ["-20px", "20px"]);
+  const mouseMoveImageY = useTransform(springY, [-0.5, 0.5], ["-20px", "20px"]);
   const mouseMoveTextX = useTransform(springX, [-0.5, 0.5], ["-10px", "10px"]);
   const mouseMoveTextY = useTransform(springY, [-0.5, 0.5], ["-10px", "10px"]);
 
@@ -45,22 +41,12 @@ const HeroSection = () => {
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  const handlePointerMove = (clientX: number, clientY: number, currentTarget: HTMLElement) => {
-    const { width, height } = currentTarget.getBoundingClientRect();
-    const x = (clientX / width) - 0.5;
-    const y = (clientY / height) - 0.5;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX / width) - 0.5;
+    const y = (e.clientY / height) - 0.5;
     mouseX.set(x);
     mouseY.set(y);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    handlePointerMove(e.clientX, e.clientY, e.currentTarget);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLElement>) => {
-    if (e.touches && e.touches.length > 0) {
-      handlePointerMove(e.touches[0].clientX, e.touches[0].clientY, e.currentTarget);
-    }
   };
 
   const handleMouseLeave = () => {
@@ -73,8 +59,6 @@ const HeroSection = () => {
       ref={ref} 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchMove}
-      onTouchMove={handleTouchMove}
       className="relative h-screen w-full overflow-hidden bg-[#0A0A0A] selection:bg-white selection:text-black"
     >
       {/* Background Floating Name (Extra depth layer) */}
@@ -111,11 +95,7 @@ const HeroSection = () => {
           y: imageY, 
           scale: imageScale,
           translateX: mouseMoveImageX,
-          translateY: mouseMoveImageY,
-          rotateX,
-          rotateY,
-          rotateZ,
-          transformPerspective: 1000,
+          translateY: mouseMoveImageY
         }}
       >
         <motion.div
