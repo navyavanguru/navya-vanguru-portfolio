@@ -1,8 +1,8 @@
 {
-  "name": "navya-digital-storyteller-portfolio",
+  "name": "navya-vanguru-portfolio",
   "version": "1.0.0",
   "description": "Cinematic portfolio for Navya Vanguru - Digital Content Specialist & Storyteller",
-  "homepage": "https://navyavanguru.github.io/digital-storyteller-portfolio",
+  "homepage": "https://navyavanguru.github.io/navya-vanguru-portfolio",
   "private": true,
   "type": "module",
   "scripts": {

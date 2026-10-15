@@ -1,6 +1,6 @@
 # Navya Vanguru — Digital Content Specialist & Storyteller
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-navyavanguru.github.io-6366f1?style=for-the-badge&logo=githubpages&logoColor=white)](https://navyavanguru.github.io/digital-storyteller-portfolio/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-navyavanguru.github.io-6366f1?style=for-the-badge&logo=githubpages&logoColor=white)](https://navyavanguru.github.io/navya-vanguru-portfolio/)
 [![React](https://img.shields.io/badge/React-18.3-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-WebGL-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
@@ -9,7 +9,7 @@
 > **"Where Strategy Meets Meaningful Storytelling."**  
 > An immersive, cinematic digital portfolio engineered for high-impact visual storytelling, creative strategy, and performance copywriting.
 
-🌐 **Live Website**: [https://navyavanguru.github.io/digital-storyteller-portfolio/](https://navyavanguru.github.io/digital-storyteller-portfolio/)
+🌐 **Live Website**: [https://navyavanguru.github.io/navya-vanguru-portfolio/](https://navyavanguru.github.io/navya-vanguru-portfolio/)
 
 ---
 
@@ -91,8 +91,8 @@
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/navyavanguru/digital-storyteller-portfolio.git
-   cd digital-storyteller-portfolio
+   git clone https://github.com/navyavanguru/navya-vanguru-portfolio.git
+   cd navya-vanguru-portfolio
    ```
 
 2. **Install dependencies**:
@@ -124,9 +124,9 @@
 This project is configured with automated continuous deployment using **GitHub Actions**:
 
 - Every push to the `main` branch automatically triggers `.github/workflows/deploy.yml`.
-- The workflow builds the production assets with the `/digital-storyteller-portfolio/` base URL.
+- The workflow builds the production assets with the `/navya-vanguru-portfolio/` base URL.
 - Artifacts are uploaded and deployed to **GitHub Pages** with HTTPS enforcement.
-- Live URL: **[https://navyavanguru.github.io/digital-storyteller-portfolio/](https://navyavanguru.github.io/digital-storyteller-portfolio/)**
+- Live URL: **[https://navyavanguru.github.io/navya-vanguru-portfolio/](https://navyavanguru.github.io/navya-vanguru-portfolio/)**
 
 ---
 
@@ -134,7 +134,7 @@ This project is configured with automated continuous deployment using **GitHub A
 
 - **LinkedIn**: [linkedin.com/in/navyavanguru](https://www.linkedin.com/in/navyavanguru)
 - **Instagram**: [@navya_vanguru](https://www.instagram.com/navya_vanguru)
-- **Portfolio**: [navyavanguru.github.io/digital-storyteller-portfolio](https://navyavanguru.github.io/digital-storyteller-portfolio/)
+- **Portfolio**: [navyavanguru.github.io/navya-vanguru-portfolio](https://navyavanguru.github.io/navya-vanguru-portfolio/)
 
 ---
 

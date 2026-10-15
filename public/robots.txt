@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://navyavanguru.github.io/digital-storyteller-portfolio/sitemap.xml
+Sitemap: https://navyavanguru.github.io/navya-vanguru-portfolio/sitemap.xml
