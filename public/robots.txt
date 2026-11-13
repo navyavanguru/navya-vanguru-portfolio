@@ -1,16 +1,47 @@
+# Robots.txt for Navya Vanguru Portfolio
+# Optimized for Search Engines (SEO) & Answer Engines (AEO)
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
+User-agent: Applebot
+User-agent: Applebot-Extended
 Allow: /
 
+# OpenAI / ChatGPT Search
+User-agent: GPTBot
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI Search Engine
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude Search Engine
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+Allow: /
+
+# Google Gemini / AI Search Engine
+User-agent: Google-Extended
+Allow: /
+
+# Cohere & Meta AI
+User-agent: cohere-ai
+User-agent: FacebookBot
 User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
 Allow: /
 
 User-agent: *
 Allow: /
 
+# Sitemaps and Knowledge Files for LLMs
 Sitemap: https://navyavanguru.github.io/navya-vanguru-portfolio/sitemap.xml
+LLMs-Text: https://navyavanguru.github.io/navya-vanguru-portfolio/llms.txt
+LLMs-Full-Text: https://navyavanguru.github.io/navya-vanguru-portfolio/llms-full.txt

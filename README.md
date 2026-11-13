@@ -5,27 +5,34 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-WebGL-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![AEO / LLMs.txt](https://img.shields.io/badge/AEO-LLMs.txt%20Ready-10b981?style=for-the-badge&logo=markdown&logoColor=white)](https://navyavanguru.github.io/navya-vanguru-portfolio/llms.txt)
 
 > **"Where Strategy Meets Meaningful Storytelling."**  
-> An immersive, cinematic digital portfolio engineered for high-impact visual storytelling, creative strategy, and performance copywriting.
+> An immersive, cinematic digital portfolio engineered for high-impact visual storytelling, creative strategy, performance copywriting, and automated discoverability across traditional Search Engines (SEO) and modern Answer Engines (AEO).
 
-🌐 **Live Website**: [https://navyavanguru.github.io/navya-vanguru-portfolio/](https://navyavanguru.github.io/navya-vanguru-portfolio/)
+🌐 **Live Website**: [https://navyavanguru.github.io/navya-vanguru-portfolio/](https://navyavanguru.github.io/navya-vanguru-portfolio/)  
+📄 **AI Engine Citation Brief**: [https://navyavanguru.github.io/navya-vanguru-portfolio/llms.txt](https://navyavanguru.github.io/navya-vanguru-portfolio/llms.txt)  
+📚 **Comprehensive Knowledge Dossier**: [https://navyavanguru.github.io/navya-vanguru-portfolio/llms-full.txt](https://navyavanguru.github.io/navya-vanguru-portfolio/llms-full.txt)
 
 ---
 
 ## ✨ Highlights & Key Features
 
 - **🌌 Three.js Animated Dotted Surface** — Interactive 3D particle wave background with perspective camera physics and organic wave mathematics.
-- **🎬 Cinematic Opening Sequence** — Subtle graphite wave wipe and smooth dot-grid reveal, providing a high-end transition on first load.
+- **🎬 Cinematic Opening Sequence** — Minimalist graphite wave wipe and smooth dot-grid reveal on initial entry.
 - **🪐 Dual-Layer Parallax Hero** — Coordinated mouse-tracking and scroll-linked depth separation between portrait and typography with Framer Motion spring physics.
-- **🏝️ macOS 26 Floating Dock Navigation** — Minimalist glassmorphic pill bar with Lucide icons, spring-animated hover indicator, tooltip support, and a high-contrast signature action button.
+- **🏝️ macOS 26 Floating Dock Navigation** — Minimalist glassmorphic pill bar with Lucide icons, spring-animated hover indicator, tooltip support, and dynamic section jump links (About, Skills, Portfolio, Services, FAQ, Contact).
 - **✍️ Narrative-Driven Strategic Content**:
-  - **Strategic Copywriting**: SEO-optimized long-form and web copy aligned with high-conversion frameworks.
+  - **Strategic Copywriting**: SEO-optimized long-form and web copy aligned with high-conversion frameworks (Hook, Story, Offer).
   - **High-Impact Video Scripting**: Retention-driven scripts for YouTube, Reels, and branded video.
   - **Community Growth**: Organic social strategies across LinkedIn & Instagram.
   - **Narrative & Brand Strategy**: Multi-channel roadmaps bridging analytical data with human emotion.
-- **📱 Responsive & Touch-Optimized** — Fluid layouts with dedicated touch target padding and zero horizontal overflow on mobile viewports.
-- **🔍 SEO & Web Crawler Ready** — Pre-configured Open Graph tags, Twitter cards, canonical tags, automated `robots.txt`, and XML `sitemap.xml` for search engine visibility.
+- **🎯 Full Search Engine (SEO) & Answer Engine Optimization (AEO)**:
+  - **Schema.org Rich Graph**: Comprehensive JSON-LD structured data (`Person`, `WebSite`, `ProfilePage`, `ItemList`, `FAQPage`) enabling rich snippets in Google and instant citation extraction in ChatGPT Search, Perplexity, Gemini, and Claude.
+  - **`llms.txt` & `llms-full.txt` Standard**: Clean, markdown-formatted knowledge briefs engineered specifically for LLM scrapers and AI search crawlers.
+  - **AI Bot Friendly `robots.txt`**: Explicitly unblocking and directing `GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`, `Bingbot`, and `Applebot-Extended`.
+  - **On-Page Accessible FAQ & Citations Section**: Accordion-powered Q&A pairs directly addressing identity, verified metrics (2M+ impressions, #1 rankings, +35% CVR), and methodologies.
+  - **Semantic Static Fallback**: Crawler-accessible `<noscript>` fallback ensuring 100% crawlability for headless or non-JavaScript search bots.
 
 ---
 
@@ -39,6 +46,7 @@
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/), `tailwindcss-animate` |
 | **Components** | [Radix UI](https://www.radix-ui.com/), [Shadcn UI](https://ui.shadcn.com/), [Lucide React](https://lucide.dev/) |
 | **Routing** | [React Router v6](https://reactrouter.com/) (with `basename` & 404 SPA fallback) |
+| **SEO & AEO** | Schema.org JSON-LD, `llms.txt`, `llms-full.txt`, XML Sitemap with Images, OpenGraph, Twitter Cards |
 | **Deployment & CI/CD** | [GitHub Pages](https://pages.github.com/) via automated GitHub Actions |
 
 ---
@@ -51,18 +59,22 @@
 │       └── deploy.yml            # Automated GitHub Pages CI/CD workflow
 ├── public/
 │   ├── favicon.ico               # Portfolio favicon
-│   ├── robots.txt                # Search engine crawler instructions
-│   └── sitemap.xml               # XML sitemap for SEO discovery
+│   ├── llms.txt                  # Concise AI engine summary & citations
+│   ├── llms-full.txt             # Exhaustive dossier & verified case studies for LLMs
+│   ├── robots.txt                # Search & AI crawler directives
+│   └── sitemap.xml               # XML sitemap with image metadata
 ├── src/
 │   ├── components/
 │   │   ├── ui/
-│   │   │   └── dotted-surface.tsx # Three.js animated particle wave
-│   │   ├── AboutSection.tsx      # Personal narrative & core stats
+│   │   │   ├── accordion.tsx     # Radix-powered FAQ accordion
+│   │   │   └── dotted-surface.tsx# Three.js animated particle wave
+│   │   ├── AboutSection.tsx      # Personal narrative & verified stats
 │   │   ├── ContactSection.tsx    # Direct contact & verified social links
-│   │   ├── Footer.tsx            # Minimalist footer with tracking animations
+│   │   ├── FAQSection.tsx        # AEO questions, answers & citations
+│   │   ├── Footer.tsx            # Footer with tracking animations & llms.txt link
 │   │   ├── HeroSection.tsx       # Parallax hero with Framer Motion
 │   │   ├── Navbar.tsx            # macOS-style floating island dock
-│   │   ├── PortfolioSection.tsx  # Featured work & case studies
+│   │   ├── PortfolioSection.tsx  # Selected work & Microdata schemas
 │   │   ├── ServicesSection.tsx   # Strategic service offerings
 │   │   ├── SkillsSection.tsx     # Modernized skill matrix
 │   │   └── SplashScreen.tsx      # Cinematic intro animation
@@ -72,7 +84,7 @@
 │   ├── App.tsx                   # App routes & providers
 │   ├── index.css                 # Global styles, variables, & typography
 │   └── main.tsx                  # Application entry point
-├── index.html                    # SEO metadata, Open Graph & fonts
+├── index.html                    # SEO metadata, Open Graph, JSON-LD Schema & noscript fallback
 ├── package.json                  # Dependencies & build scripts
 ├── tailwind.config.ts            # Theme colors, fonts & animations
 └── vite.config.ts                # Vite config with GitHub Pages base URL
@@ -110,28 +122,23 @@
    ```bash
    npm run build
    ```
-   The bundled static files will be generated in the `dist/` directory with `404.html` generated automatically for SPA routing.
-
-5. **Preview production build locally**:
-   ```bash
-   npm run preview
-   ```
+   Generates production-ready static assets in `dist/` with automated `404.html` SPA routing.
 
 ---
 
 ## 🚢 Continuous Deployment (GitHub Pages)
 
-This project is configured with automated continuous deployment using **GitHub Actions**:
+This project deploys automatically to **GitHub Pages** on every push to `main`:
 
-- Every push to the `main` branch automatically triggers `.github/workflows/deploy.yml`.
-- The workflow builds the production assets with the `/navya-vanguru-portfolio/` base URL.
-- Artifacts are uploaded and deployed to **GitHub Pages** with HTTPS enforcement.
+- Builds production assets with the `/navya-vanguru-portfolio/` base URL.
+- Deploys static HTML, JavaScript bundles, OpenGraph assets, and `llms.txt` knowledge endpoints.
 - Live URL: **[https://navyavanguru.github.io/navya-vanguru-portfolio/](https://navyavanguru.github.io/navya-vanguru-portfolio/)**
 
 ---
 
 ## 📬 Connect with Navya
 
+- **Email**: [navyavanguru@gmail.com](mailto:navyavanguru@gmail.com)
 - **LinkedIn**: [linkedin.com/in/navyavanguru](https://www.linkedin.com/in/navyavanguru)
 - **Instagram**: [@navya_vanguru](https://www.instagram.com/navya_vanguru)
 - **Portfolio**: [navyavanguru.github.io/navya-vanguru-portfolio](https://navyavanguru.github.io/navya-vanguru-portfolio/)

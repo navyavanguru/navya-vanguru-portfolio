@@ -76,8 +76,10 @@ const PortfolioSection = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {portfolioItems.map((item, i) => (
-            <motion.div
+            <motion.article
               key={item.title}
+              itemScope
+              itemType="https://schema.org/CreativeWork"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
@@ -110,18 +112,18 @@ const PortfolioSection = () => {
                   <span className="text-xs font-medium text-muted-foreground bg-accent px-3 py-1 rounded-full">
                     {item.tag}
                   </span>
-                  <span className="text-xs font-bold text-foreground tracking-wide">
+                  <span className="text-xs font-bold text-foreground tracking-wide" itemProp="keywords">
                     {item.metric}
                   </span>
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors" itemProp="name">
                   {item.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed" itemProp="description">
                   {item.description}
                 </p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

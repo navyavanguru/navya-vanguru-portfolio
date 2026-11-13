@@ -20,9 +20,11 @@ const ContactSection = () => {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
             Open to Opportunities
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-12">
-            I'm currently exploring new roles in digital marketing and content strategy. 
-            If you think I'd be a great fit for your team, let's talk.
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-4 font-light">
+            Based in Bengaluru, India and collaborating globally. Whether you are scaling a B2B SaaS startup, launching a creator brand, or looking for an impactful content strategist and storyteller, let’s build something memorable.
+          </p>
+          <p className="text-xs uppercase tracking-widest text-muted-foreground/80 font-mono mb-10">
+            Available for Full-Time Roles • High-Impact Consulting • Select Commissions
           </p>
         </motion.div>
 
@@ -33,11 +35,11 @@ const ContactSection = () => {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="mailto:navya@example.com"
+            href="mailto:navyavanguru@gmail.com"
             className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
           >
             <Mail className="w-4 h-4" />
-            Email Me
+            navyavanguru@gmail.com
           </a>
           <a
             href="https://www.linkedin.com/in/navyavanguru"

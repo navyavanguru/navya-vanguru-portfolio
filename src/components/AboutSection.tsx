@@ -30,19 +30,14 @@ const AboutSection = () => {
           className="space-y-6"
         >
           <p className="text-lg text-muted-foreground leading-relaxed font-light">
-            I’m Navya, a digital strategist who believes that every brand has a pulse, 
-            and every pulse has a story waiting to be told. I specialize in bridging 
-            the gap between complex data and human emotion—crafting content that 
-            doesn't just fill space, but builds deep, lasting loyalty.
+            I’m Navya Vanguru, a digital content specialist and brand storyteller based in Bengaluru, India. I believe that every brand has a distinct pulse, and every pulse has an authentic story waiting to be told. I specialize in bridging analytical data, SEO intent, and human emotion—crafting content that doesn't just fill space, but builds measurable authority and lasting brand loyalty.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed font-light">
-            My approach combines the precision of SEO with the nuance of creative 
-            direction. Whether it's a high-retention video script or a thought-leadership 
-            blog, I focus on the 'why' behind the scroll.
+            My approach unites quantitative search optimization with high-retention creative direction. Whether orchestrating a multi-channel B2B SaaS launch film, engineering high-retention YouTube scripts, or structuring search-dominant SEO pillar series, I focus on the psychology behind the scroll.
           </p>
           <div className="flex gap-12 pt-4">
             {[
-              { number: "50+", label: "Portfolios Directed" },
+              { number: "50+", label: "Projects Directed" },
               { number: "2M+", label: "Content Reach" },
               { number: "3+", label: "Years Experience" },
             ].map((stat) => (

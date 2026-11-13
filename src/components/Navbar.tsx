@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Code, Briefcase, Mail, Home, Layers, Sparkles } from "lucide-react";
+import { User, Code, Briefcase, Mail, Home, Layers, Sparkles, HelpCircle } from "lucide-react";
 
 const navLinks = [
   { label: "About", href: "#about", icon: User },
   { label: "Skills", href: "#skills", icon: Code },
   { label: "Portfolio", href: "#portfolio", icon: Briefcase },
   { label: "Services", href: "#services", icon: Sparkles },
+  { label: "FAQ", href: "#faq", icon: HelpCircle },
   { label: "Contact", href: "#contact", icon: Mail },
 ];
 

@@ -2,6 +2,8 @@ const Footer = () => {
   const socials = [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/navyavanguru" },
     { name: "Instagram", href: "https://www.instagram.com/navya_vanguru?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+    { name: "GitHub", href: "https://github.com/navyavanguru/navya-vanguru-portfolio" },
+    { name: "AI Citations (llms.txt)", href: `${import.meta.env.BASE_URL}llms.txt` },
   ];
 
   return (
