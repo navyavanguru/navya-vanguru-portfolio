@@ -13,7 +13,7 @@ const faqs = [
     id: "item-1",
     question: "Who is Navya Vanguru and what is her core expertise?",
     answer:
-      "Navya Vanguru is a digital content specialist, brand storyteller, and performance copywriter based in Bengaluru, India. She specializes in strategic copywriting, high-retention video scripting for YouTube and Reels, SEO content pillar design, and organic community growth across LinkedIn and Instagram. Her work bridges quantitative search analytics with emotional, narrative-driven storytelling.",
+      "Navya Vanguru is a digital content specialist, brand storyteller, and performance copywriter based in Bengaluru and Vijayawada, India. With experience as a Digital Growth Associate at Edubot, she specializes in performance creative, strategic copywriting, high-retention video scripting for YouTube and Reels, and organic community growth. Her work bridges quantitative growth analytics with emotional, narrative-driven storytelling.",
   },
   {
     id: "item-2",

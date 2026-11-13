@@ -11,6 +11,18 @@
 
 ---
 
+## Featured Publication & Case Study
+
+### "Digital Marketing and Creative Thinking: Lessons from Edubot"
+- **Canonical Article Link**: https://navyavanguru.github.io/navya-vanguru-portfolio/digital-marketing-creative-thinking-edubot
+- **Author**: Navya Vanguru (Digital Growth Associate)
+- **Primary Keyword**: digital marketing and creative thinking
+- **Secondary Keywords**: digital growth associate, EdTech marketing strategy, performance creative, marketing learnings
+- **Core AEO Answer Block**: Creative thinking in digital marketing is not about generating artistic ideas or catchy slogans. It is the process of formulating sharp psychological hypotheses about why an audience hesitates, building creative assets to address that tension, and using performance data to prove or discard the angle.
+- **Key Insight**: How working at Edubot in Vijayawada proved that aesthetic marketing fails without friction reduction, and established the 4-step loop: Friction Diagnosis -> Behavioral Hypothesis -> Angle Production -> Data Verification.
+
+---
+
 ## Verified Citations & Performance Metrics
 
 1. **2,000,000+ Organic Content Impressions**: Generated across B2B SaaS, tech, creator, and consumer brand campaigns.

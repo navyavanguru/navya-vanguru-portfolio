@@ -1,8 +1,18 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Play, ExternalLink, FileText, Video, BarChart3, PenTool, Instagram, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Play, ExternalLink, FileText, Video, BarChart3, PenTool, Instagram, Youtube, Sparkles, ArrowRight } from "lucide-react";
 
 const portfolioItems = [
+  {
+    type: "article" as const,
+    icon: Sparkles,
+    tag: "Flagship Essay",
+    title: "Digital Marketing and Creative Thinking: Lessons from Edubot",
+    description: "How transitioning from beginner to Digital Growth Associate at Edubot in Vijayawada taught me to pair creative thinking with performance data.",
+    metric: "EdTech Growth",
+    link: "/digital-marketing-creative-thinking-edubot",
+  },
   {
     type: "video" as const,
     icon: Video,
@@ -75,56 +85,85 @@ const PortfolioSection = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {portfolioItems.map((item, i) => (
-            <motion.article
-              key={item.title}
-              itemScope
-              itemType="https://schema.org/CreativeWork"
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative bg-card border border-border rounded-2xl overflow-hidden hover:border-foreground/20 hover:shadow-lg transition-all duration-500"
-            >
-              {/* Thumbnail placeholder */}
-              <div className="relative h-48 bg-accent/50 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-muted to-accent opacity-60" />
-                <item.icon className="relative z-10 w-12 h-12 text-foreground/30 group-hover:text-foreground/50 transition-colors duration-500 group-hover:scale-110 transform" />
+          {portfolioItems.map((item, i) => {
+            const CardContent = (
+              <>
+                {/* Thumbnail placeholder */}
+                <div className="relative h-48 bg-accent/50 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-muted to-accent opacity-60" />
+                  <item.icon className="relative z-10 w-12 h-12 text-foreground/30 group-hover:text-foreground/50 transition-colors duration-500 group-hover:scale-110 transform" />
 
-                {item.type === "video" && (
-                  <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-14 h-14 rounded-full bg-foreground/90 flex items-center justify-center">
-                      <Play className="w-6 h-6 text-background ml-0.5" />
+                  {item.type === "video" && (
+                    <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-14 h-14 rounded-full bg-foreground/90 flex items-center justify-center">
+                        <Play className="w-6 h-6 text-background ml-0.5" />
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {item.type !== "video" && (
-                  <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-8 h-8 rounded-full bg-foreground/10 backdrop-blur flex items-center justify-center">
-                      <ExternalLink className="w-4 h-4 text-foreground" />
+                  {item.type !== "video" && !item.link && (
+                    <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-8 h-8 rounded-full bg-foreground/10 backdrop-blur flex items-center justify-center">
+                        <ExternalLink className="w-4 h-4 text-foreground" />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
 
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-medium text-muted-foreground bg-accent px-3 py-1 rounded-full">
-                    {item.tag}
-                  </span>
-                  <span className="text-xs font-bold text-foreground tracking-wide" itemProp="keywords">
-                    {item.metric}
-                  </span>
+                  {item.link && (
+                    <div className="absolute top-3 right-3 z-20">
+                      <div className="px-2.5 py-1 rounded-full bg-white text-black text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg">
+                        <span>Read</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors" itemProp="name">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed" itemProp="description">
-                  {item.description}
-                </p>
-              </div>
-            </motion.article>
-          ))}
+
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-medium text-muted-foreground bg-accent px-3 py-1 rounded-full">
+                      {item.tag}
+                    </span>
+                    <span className="text-xs font-bold text-foreground tracking-wide" itemProp="keywords">
+                      {item.metric}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors" itemProp="name">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed" itemProp="description">
+                    {item.description}
+                  </p>
+                  {item.link && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/80 group-hover:text-white mt-4 group-hover:translate-x-1 transition-all">
+                      <span>Read Full Essay &amp; Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  )}
+                </div>
+              </>
+            );
+
+            return (
+              <motion.article
+                key={item.title}
+                itemScope
+                itemType="https://schema.org/CreativeWork"
+                initial={{ opacity: 0, y: 50 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="group relative bg-card border border-border rounded-2xl overflow-hidden hover:border-foreground/20 hover:shadow-lg transition-all duration-500"
+              >
+                {item.link ? (
+                  <Link to={item.link} className="block h-full cursor-pointer">
+                    {CardContent}
+                  </Link>
+                ) : (
+                  CardContent
+                )}
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
